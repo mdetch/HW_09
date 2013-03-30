@@ -1,6 +1,10 @@
 require 'socket'
-
-s = TCPSocket.new "127.0.0.1", 11111
+begin
+	s = TCPSocket.new "127.0.0.1", 11111
+rescue Exception => e
+	puts "Don't know about host: 127.0.0.1"
+	exit
+end
 
 puts "Type Message (\"Bye.\" to quit)"
 

@@ -1,14 +1,6 @@
 require 'socket'
 
-begin
-	s = TCPSocket.new "127.0.0.1", 11111
-rescue Exception => e
-	puts "Don't know about host: 127.0.0.1."
-	exit
-rescue IOError => e
-	puts "Couldn't get I/O for " + "the connection to: 127.0.0.1."
-	exit
-end
+s = TCPSocket.new "127.0.0.1", 11111
 
 puts "Type Message (\"Bye.\" to quit)"
 
@@ -16,6 +8,10 @@ while
 	STDOUT.flush  
 	message = gets.chomp 
 	s.puts message
+
+	if message=="Bye."
+		exit
+	end
 
 	replymsg = s.gets
 	puts "echo: "+replymsg
